@@ -26,6 +26,7 @@
          matrix[xPos][yPos - 1] = num;
          matrix[xPos + 1][ yPos - 1] = num;
          matrix[xPos + 1][ yPos] = num;
+         matrix[xPos][yPos] = 0;
        } else if(vinkel == 1) {
          //tomt i undre högra kvadranten
          matrix[xPos][yPos - 1] = num;
