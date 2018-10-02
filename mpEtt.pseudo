@@ -1,0 +1,30 @@
+/*
+*INDATA: jämn tvåpotens m = 2^n
+*UTDATA: mxm-matris ifylld med L på alla positioner utom övre högra hörn.
+*/
+STEG 1: Fyll i ett L i mitten av kvadraten
+STEG 2: Dela in resten av kvadraten i fyra delar, och fyll dessa. Alltså får vi 4 * O(m/2).
+STEG 3: Sätt ihop dekompositionen.
+
+
+//Vi initierar först en matris med mxm dimension, och ger varje ruta ett värde på
+//-1 vilket vi tolkar som att denna ruta är ej använd än.
+ASSERT n > 0 & m = 2 ^ n
+initKvadrat(m):
+    for i = 0 up to m do:
+        for j = 0 up to m do:
+            M[i,j] = -1;
+fyllKvadrat(m):
+    initKvadrat();
+    dekompKvadrat(m, m/2, m/2, 0);
+
+dekompKvadrat(m, xPos, yPos, num, vinkel):
+    //fyll i mitten med ett L
+    M[xPos, yPos - 1] = num
+    M[xPos - 1, yPos] = num
+    M[xPos, yPos] = num
+    //dela upp i fyra delproblem
+    dekompKvadrat(m/2, xPos - 1, yPos + 1, num + 1, 0) //upp till höger
+    dekompKvadrat(m/2, xPos + 1, yPos + 2, num + 1, 1) //ner till höger
+    dekompKvadrat(m/2, xPos + 1, yPos - 1, num + 1, 0) //ner till vänster
+    dekompKvadrat(m/2, xPos - 2, yPos - 1, num + 1, 2) //upp till vänster
